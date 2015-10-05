@@ -1,0 +1,24 @@
+{
+    "title": "Event",
+    "description": "A smart door event",
+    "type": "object",
+    "properties": {
+        "event": {
+            "description": "The type of event that occurred",
+            "type": "string"
+        },
+		"time": {
+            "description": "The time at which the event occurred",
+            "type": "string"
+        },
+        "source": {
+            "description": "The id of the smart door",
+            "type": "string"
+        },
+        "id": {
+			"description": "The id of the person associated with the event",
+            "type": "string"
+        }
+    },
+    "required": ["event", "time", "source"]
+}
