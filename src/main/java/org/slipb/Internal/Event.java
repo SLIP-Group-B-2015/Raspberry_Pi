@@ -1,10 +1,13 @@
-package com.company;
+package org.slipb.Internal;
 
 import java.util.Date;
 
 /**
  * Created by Marshall on 06/10/2015.
+ *
+ * Class to internally represent events
  */
+
 public class Event {
 
     private EventType eventType;

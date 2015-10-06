@@ -1,4 +1,7 @@
-package com.company;
+package org.slipb.Communication;
+
+import org.slipb.Internal.Event;
+import org.slipb.Internal.Id;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -6,7 +9,7 @@ import javax.json.JsonObject;
 /**
  * Created by Marshall on 05/10/2015.
  *
- * This class builds the json to be sent to the server
+ * This class builds the JSON to be sent to the server
  */
 
 public class JsonBuilder {
@@ -28,7 +31,6 @@ public class JsonBuilder {
                     .add(ID, event.getId().getLong())
                     .build();
         } else {
-
             json = Json.createObjectBuilder()
                     .add(EVENT, event.getEventType().name())
                     .add(TIME, event.getTime().toString())
