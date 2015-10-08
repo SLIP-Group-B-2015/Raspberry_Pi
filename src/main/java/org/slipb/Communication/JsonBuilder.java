@@ -1,7 +1,7 @@
 package org.slipb.Communication;
 
 import org.slipb.Internal.Event;
-import org.slipb.Internal.Id;
+import org.slipb.Internal.ID.PiID;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -16,25 +16,25 @@ public class JsonBuilder {
 
     private static final String EVENT = "event";
     private static final String TIME = "time";
-    private static final String SOURCE = "source";
-    private static final String ID = "id";
+    private static final String PIID = "pi";
+    private static final String USERID = "user";
 
     private JsonObject json;
 
-    public JsonBuilder(Event event, Id sourceId) {
+    public JsonBuilder(Event event, PiID piID) {
 
-        if (event.getId() != null) {
+        if (event.getUserID() != null) {
             json = Json.createObjectBuilder()
                     .add(EVENT, event.getEventType().name())
                     .add(TIME, event.getTime().toString())
-                    .add(SOURCE, sourceId.getLong())
-                    .add(ID, event.getId().getLong())
+                    .add(PIID, piID.toString())
+                    .add(USERID, event.getUserID().toString())
                     .build();
         } else {
             json = Json.createObjectBuilder()
                     .add(EVENT, event.getEventType().name())
                     .add(TIME, event.getTime().toString())
-                    .add(SOURCE, sourceId.getLong())
+                    .add(PIID, piID.toString())
                     .build();
         }
     }

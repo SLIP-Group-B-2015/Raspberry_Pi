@@ -11,14 +11,14 @@
             "description": "The time at which the event occurred",
             "type": "string"
         },
-        "source": {
-            "description": "The id of the smart door",
+        "pi": {
+            "description": "The uuid of the smart door",
             "type": "string"
         },
-        "id": {
-			"description": "The id of the person associated with the event",
+        "user": {
+			"description": "The uuid of the person associated with the event",
             "type": "string"
         }
     },
-    "required": ["event", "time", "source"]
+    "required": ["event", "time", "pi"]
 }

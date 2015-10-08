@@ -1,5 +1,7 @@
 package org.slipb.Internal;
 
+import org.slipb.Internal.ID.UserID;
+
 import java.util.Date;
 
 /**
@@ -12,17 +14,17 @@ public class Event {
 
     private EventType eventType;
     private Date time;
-    private Id id;
+    private UserID userID;
 
     public Event(EventType eventType, Date time){
         this.eventType = eventType;
         this.time = time;
     }
 
-    public Event(EventType eventType, Date time, Id id){
+    public Event(EventType eventType, Date time, UserID userID){
         this.eventType = eventType;
         this.time = time;
-        this.id = id;
+        this.userID = userID;
     }
 
     public EventType getEventType() {
@@ -33,7 +35,7 @@ public class Event {
         return this.time;
     }
 
-    public Id getId() {
-        return this.id;
+    public UserID getUserID() {
+        return this.userID;
     }
 }

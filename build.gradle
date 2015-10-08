@@ -2,6 +2,9 @@ group 'SLIP_B'
 version '1.0'
 
 apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = "org.slipb.Main"
 
 repositories {
     mavenCentral()

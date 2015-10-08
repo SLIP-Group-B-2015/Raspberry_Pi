@@ -4,10 +4,10 @@ import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 import org.slipb.Communication.JsonBuilder;
 import org.slipb.Communication.JsonSender;
-import org.slipb.Exceptions.InvalidIdException;
+import org.slipb.Exceptions.InvalidIDException;
 import org.slipb.Internal.Event;
 import org.slipb.Internal.EventReceiver;
-import org.slipb.Internal.Id;
+import org.slipb.Internal.ID.PiID;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -25,22 +25,22 @@ public class Main {
     private static final String HTTP_POST_FAILED = "HTTP POST Request failed, retrying...";
     private static final String MAX_HTTP_POST_FAILED = "HTTP POST Request failed, max attempts reached";
 
-    private static Id sourceId;
+    private static PiID piID;
 
     public static void main(String[] args) {
 
         // Set Raspberry Pi's unique id
         try {
-            sourceId = Id.getSourceId(FILE_LOCATION);
+            piID = PiID.readPiID(FILE_LOCATION);
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
-        } catch (InvalidIdException ex) {
+        } catch (InvalidIDException ex) {
             System.err.println(INVALID_ID);
             System.exit(-1);
         }
 
         if (DEBUG) {
-            System.out.println("Source ID set to " + sourceId.getLong());
+            System.out.println("Source ID set to " + piID.getUUID().toString());
         }
 
         JsonSender jsonSender = new JsonSender(SERVER_URL);
@@ -49,7 +49,7 @@ public class Main {
         while (true) {
 
             Event latestEvent = EventReceiver.receive();
-            String json = new JsonBuilder(latestEvent, sourceId).getString();
+            String json = new JsonBuilder(latestEvent, piID).getString();
 
             if (DEBUG) {
                 System.out.println("Posting JSON: " + json + " to server");
@@ -68,7 +68,7 @@ public class Main {
 
                 if (responseString.equals(POS_RESPONSE)) {
                     break;
-                } else if (attempts == MAX_ATTEMPTS - 1) {
+                } else if (attempts >= MAX_ATTEMPTS - 1) {
                     if (DEBUG) {
                         System.err.println(MAX_HTTP_POST_FAILED);
                     }

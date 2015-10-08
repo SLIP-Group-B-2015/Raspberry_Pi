@@ -1,6 +1,9 @@
 package org.slipb.Internal;
 
+import org.slipb.Internal.ID.UserID;
+
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * Created by Marshall on 06/10/2015.
@@ -8,7 +11,7 @@ import java.util.Date;
 
 public class EventReceiver {
 
-    private static final Id DUMMY_ID = new Id(33011);
+    private static final UserID DUMMY_ID = new UserID(UUID.randomUUID());
 
     public static Event receive() {
 
@@ -18,8 +21,8 @@ public class EventReceiver {
         Date time = new Date();
 
         if (eventType == EventType.ID_SCAN) {
-            Id id = DUMMY_ID;
-            event = new Event(eventType, time, id);
+            UserID userID = DUMMY_ID;
+            event = new Event(eventType, time, userID);
         } else {
             event = new Event(eventType, time);
         }
