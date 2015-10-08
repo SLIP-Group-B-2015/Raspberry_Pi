@@ -3,18 +3,17 @@ package org.slipb.Internal.ID;
 import java.util.UUID;
 
 /**
- * Created by Marshall on 08/10/2015.
+ * Created by Marshall Bradley (marshallbradley93@gmail.com)
+ *
+ * Sub class for IDs assigned to Users
  */
-public class UserID {
-    private static UUID uuid;
+public class UserID extends ID {
 
     public UserID(UUID uuid) {
-        this.uuid = uuid;
+        super(uuid);
     }
 
-    public UUID getUUID() {
-        return this.uuid;
+    public UserID(String uuidString) {
+        super(uuidString);
     }
-
-    public String toString() {return this.uuid.toString();}
 }

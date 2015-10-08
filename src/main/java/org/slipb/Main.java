@@ -4,7 +4,6 @@ import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 import org.slipb.Communication.JsonBuilder;
 import org.slipb.Communication.JsonSender;
-import org.slipb.Exceptions.InvalidIDException;
 import org.slipb.Internal.Event;
 import org.slipb.Internal.EventReceiver;
 import org.slipb.Internal.ID.PiID;
@@ -21,7 +20,6 @@ public class Main {
     private static final String POS_RESPONSE = "RECEIVED";
     private static final String NEG_RESPONSE = "NOT RECEIVED";
 
-    private static final String INVALID_ID = "Source ID invalid";
     private static final String HTTP_POST_FAILED = "HTTP POST Request failed, retrying...";
     private static final String MAX_HTTP_POST_FAILED = "HTTP POST Request failed, max attempts reached";
 
@@ -34,13 +32,10 @@ public class Main {
             piID = PiID.readPiID(FILE_LOCATION);
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
-        } catch (InvalidIDException ex) {
-            System.err.println(INVALID_ID);
-            System.exit(-1);
         }
 
         if (DEBUG) {
-            System.out.println("Source ID set to " + piID.getUUID().toString());
+            System.out.println("Source ID set to " + piID.toString());
         }
 
         JsonSender jsonSender = new JsonSender(SERVER_URL);
@@ -59,6 +54,7 @@ public class Main {
             while (true) {
 
                 String responseString = NEG_RESPONSE;
+
                 try {
                     HttpResponse httpResponse = jsonSender.send(json);
                     responseString = EntityUtils.toString(httpResponse.getEntity());

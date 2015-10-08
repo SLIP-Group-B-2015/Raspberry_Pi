@@ -6,7 +6,9 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
- * Created by Marshall on 06/10/2015.
+ * Created by Marshall Bradley (marshallbradley93@gmail.com)
+ *
+ * Receives door events and builds them into internal events
  */
 
 public class EventReceiver {

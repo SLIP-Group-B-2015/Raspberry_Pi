@@ -9,7 +9,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import java.io.IOException;
 
 /**
- * Created by Marshall on 06/10/2015.
+ * Created by Marshall Bradley (marshallbradley93@gmail.com)
  *
  * This class initiates a HTTP POST request to send the JSON to the server
  */

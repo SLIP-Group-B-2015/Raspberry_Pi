@@ -5,7 +5,7 @@ import org.slipb.Internal.ID.UserID;
 import java.util.Date;
 
 /**
- * Created by Marshall on 06/10/2015.
+ * Created by Marshall Bradley (marshallbradley93@gmail.com)
  *
  * Class to internally represent events
  */
@@ -27,15 +27,9 @@ public class Event {
         this.userID = userID;
     }
 
-    public EventType getEventType() {
-        return this.eventType;
-    }
+    public EventType getEventType() {return this.eventType;}
 
-    public Date getTime() {
-        return this.time;
-    }
+    public Date getTime() {return this.time;}
 
-    public UserID getUserID() {
-        return this.userID;
-    }
+    public UserID getUserID() {return this.userID;}
 }
