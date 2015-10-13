@@ -11,7 +11,7 @@
             "description": "The time at which the event occurred",
             "type": "string"
         },
-        "pi": {
+        "raspberry": {
             "description": "The uuid of the smart door",
             "type": "string"
         },
@@ -20,5 +20,5 @@
             "type": "string"
         }
     },
-    "required": ["event", "time", "pi"]
+    "required": ["event", "time", "raspberry"]
 }

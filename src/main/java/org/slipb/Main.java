@@ -6,7 +6,7 @@ import org.slipb.Communication.JsonBuilder;
 import org.slipb.Communication.JsonSender;
 import org.slipb.Internal.Event;
 import org.slipb.Internal.EventReceiver;
-import org.slipb.Internal.ID.PiID;
+import org.slipb.Internal.ID.RaspberryID;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -23,19 +23,19 @@ public class Main {
     private static final String HTTP_POST_FAILED = "HTTP POST Request failed, retrying...";
     private static final String MAX_HTTP_POST_FAILED = "HTTP POST Request failed, max attempts reached";
 
-    private static PiID piID;
+    private static RaspberryID raspberryID;
 
     public static void main(String[] args) {
 
         // Set Raspberry Pi's unique id
         try {
-            piID = PiID.readPiID(FILE_LOCATION);
+            raspberryID = RaspberryID.readPiID(FILE_LOCATION);
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
         }
 
         if (DEBUG) {
-            System.out.println("Source ID set to " + piID.toString());
+            System.out.println("Source ID set to " + raspberryID.toString());
         }
 
         JsonSender jsonSender = new JsonSender(SERVER_URL);
@@ -44,7 +44,7 @@ public class Main {
         while (true) {
 
             Event latestEvent = EventReceiver.receive();
-            String json = new JsonBuilder(latestEvent, piID).getString();
+            String json = new JsonBuilder(latestEvent, raspberryID).getString();
 
             if (DEBUG) {
                 System.out.println("Posting JSON: " + json + " to server");

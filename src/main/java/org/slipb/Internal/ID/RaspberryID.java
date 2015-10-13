@@ -10,24 +10,24 @@ import java.util.UUID;
  *
  * Sub class for IDs assigned to Pis
  */
-public class PiID extends ID {
+public class RaspberryID extends ID {
 
-    public PiID(UUID uuid) {
+    public RaspberryID(UUID uuid) {
         super(uuid);
     }
 
-    public PiID(String uuidString) {
+    public RaspberryID(String uuidString) {
         super(uuidString);
     }
 
-    public static PiID readPiID(String fileLocation) throws FileNotFoundException {
+    public static RaspberryID readPiID(String fileLocation) throws FileNotFoundException {
 
         String uuidString;
         Scanner in = new Scanner(new FileReader(fileLocation));
 
         uuidString = in.next();
-        PiID piID = new PiID(uuidString);
+        RaspberryID raspberryID = new RaspberryID(uuidString);
 
-        return piID;
+        return raspberryID;
     }
 }
