@@ -1,4 +1,4 @@
-package org.slipb.Internal;
+package org.slipb.Internal.Event;
 
 import org.slipb.Internal.ID.UserID;
 
@@ -27,9 +27,15 @@ public class Event {
         this.userID = userID;
     }
 
-    public EventType getEventType() {return this.eventType;}
+    public EventType getEventType() {
+        return this.eventType;
+    }
 
-    public Date getTime() {return this.time;}
+    public Date getTime() {
+        return this.time;
+    }
 
-    public UserID getUserID() {return this.userID;}
+    public UserID getUserID() {
+        return this.userID;
+    }
 }

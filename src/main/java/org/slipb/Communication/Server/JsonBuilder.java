@@ -1,6 +1,6 @@
-package org.slipb.Communication;
+package org.slipb.Communication.Server;
 
-import org.slipb.Internal.Event;
+import org.slipb.Internal.Event.Event;
 import org.slipb.Internal.ID.RaspberryID;
 
 import javax.json.Json;

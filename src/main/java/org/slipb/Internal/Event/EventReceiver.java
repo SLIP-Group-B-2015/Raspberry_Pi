@@ -1,7 +1,10 @@
-package org.slipb.Internal;
+package org.slipb.Internal.Event;
 
+import org.slipb.Communication.Sensor.BluetoothServer;
+import org.slipb.Internal.ID.RaspberryID;
 import org.slipb.Internal.ID.UserID;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.UUID;
 
@@ -14,11 +17,18 @@ import java.util.UUID;
 public class EventReceiver {
 
     private static final UserID DUMMY_ID = new UserID(UUID.randomUUID());
+    private static Event event;
 
-    public static Event receive() {
+    public static Event receive(RaspberryID raspberryID) {
 
-        Event event;
-        // TODO: Using dummy inputs now
+        try {
+            // launch bluetooth server
+            BluetoothServer bluetoothServer = new BluetoothServer(raspberryID);
+            bluetoothServer.run();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
         EventType eventType = EventType.ID_SCAN;
         Date time = new Date();
 

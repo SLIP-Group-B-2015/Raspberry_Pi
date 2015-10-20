@@ -1,4 +1,4 @@
-package org.slipb.Internal;
+package org.slipb.Internal.Event;
 
 /**
  * Created by Marshall Bradley (marshallbradley93@gmail.com)
