@@ -54,7 +54,7 @@ public class HttpSender {
                 if (Main.DEBUG) {
                     System.err.println(MAX_HTTP_POST_FAILED);
                 }
-                break;
+                return false;
             } else {
                 if (Main.DEBUG) {
                     System.err.println(HTTP_POST_FAILED);
@@ -62,7 +62,6 @@ public class HttpSender {
                 attempts++;
             }
         }
-        return false;
     }
 
     private HttpResponse postJson(String json) {

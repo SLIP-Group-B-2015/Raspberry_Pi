@@ -40,11 +40,12 @@ public class Main {
         }
 
         HttpSender httpSender = new HttpSender(serverUrl);
+        EventReceiver eventReceiver = new EventReceiver();
 
         // Enter main loop
         while (true) {
             try {
-                Event latestEvent = EventReceiver.receive(raspberryID);
+                Event latestEvent = eventReceiver.receive(raspberryID);
                 if (DEBUG) {
                     System.out.println("Received event");
                 }
