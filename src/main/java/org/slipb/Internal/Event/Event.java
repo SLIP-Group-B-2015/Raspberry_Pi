@@ -15,6 +15,7 @@ public class Event {
     private EventType eventType;
     private Date time;
     private UserID userID;
+    private String note;
 
     public Event(EventType eventType, Date time){
         this.eventType = eventType;
@@ -27,6 +28,13 @@ public class Event {
         this.userID = userID;
     }
 
+    public Event(EventType eventType, Date time, UserID userID, String note){
+        this.eventType = eventType;
+        this.time = time;
+        this.userID = userID;
+        this.note = note;
+    }
+
     public EventType getEventType() {
         return this.eventType;
     }
@@ -37,5 +45,9 @@ public class Event {
 
     public UserID getUserID() {
         return this.userID;
+    }
+
+    public String getNote() {
+        return this.note;
     }
 }

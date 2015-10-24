@@ -7,32 +7,46 @@ package org.slipb.Communication.Sensor;
  */
 
 import org.slipb.Internal.ID.RaspberryID;
+import org.slipb.Main;
 
-import java.io.IOException;
-
-import javax.bluetooth.*;
+import javax.bluetooth.DiscoveryAgent;
+import javax.bluetooth.LocalDevice;
+import javax.bluetooth.UUID;
 import javax.microedition.io.Connector;
-import javax.obex.*;
+import javax.microedition.io.StreamConnection;
+import javax.microedition.io.StreamConnectionNotifier;
+import java.io.DataInputStream;
+
 
 public class BluetoothServer {
 
-    private static RaspberryID raspberryID;
+    private final String url;
 
     public BluetoothServer(RaspberryID raspberryID) {
-        this.raspberryID = raspberryID;
+        UUID uuid = new UUID(raspberryID.toShortString(), true);
+        this.url = "btspp://localhost:" +
+                uuid + ";" +
+                "name=SmartDoor;" +
+                "authenticate=false;" +
+                "encrypt=false;";
     }
 
-    public void run() throws IOException {
-        LocalDevice.getLocalDevice().setDiscoverable(DiscoveryAgent.GIAC);
+    public void run() {
 
-        SessionNotifier serverConnection = (SessionNotifier) Connector.open("btgoep://localhost:"
-                + raspberryID.toString() + ";name=SmartDoor");
+        try {
+            LocalDevice.getLocalDevice().setDiscoverable(DiscoveryAgent.GIAC);
+            StreamConnectionNotifier server = (StreamConnectionNotifier) Connector.open(url);
+            StreamConnection connection = server.acceptAndOpen();
+            DataInputStream inputStream = new DataInputStream(connection.openInputStream());
+            if (Main.DEBUG) {
+                System.out.println("Bluetooth client connected");
+            }
 
-        int count = 0;
-        while(count < 2) {
-            BluetoothRequestHandler handler = new BluetoothRequestHandler();
-            serverConnection.acceptAndOpen(handler);
-            System.out.println("Received Bluetooth connection " + (++count));
+            while (true) {
+                System.out.print(inputStream.read());
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 }

@@ -1,7 +1,5 @@
 package org.slipb;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.util.EntityUtils;
 import org.slipb.Communication.Server.JsonBuilder;
 import org.slipb.Communication.Server.HttpSender;
 import org.slipb.Internal.Event.Event;
@@ -14,7 +12,7 @@ import java.io.IOException;
 public class Main {
 
     public static final Boolean DEBUG = true;
-    private static final String FILE_LOCATION = "C:/source.id";
+    private static final String FILE_LOCATION = "/home/pi/Desktop/source.id"; //"C:/source.id";
     private static final String DEFAULT_URL = "http://www.test.com";
 
     private static String serverUrl;

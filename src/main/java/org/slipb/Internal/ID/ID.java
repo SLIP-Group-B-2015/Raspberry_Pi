@@ -10,6 +10,8 @@ import java.util.UUID;
 
 public abstract class ID {
 
+    private static final int SHORT_LENGTH = 8;
+
     private static UUID uuid;
 
     public ID(UUID uuid) {
@@ -23,4 +25,9 @@ public abstract class ID {
     public String toString() {
         return this.uuid.toString();
     }
+
+    public String toShortString() {
+        return this.uuid.toString().substring(0, SHORT_LENGTH);
+    }
+
 }

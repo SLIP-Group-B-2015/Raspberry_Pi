@@ -18,19 +18,29 @@ public class JsonBuilder {
     private static final String TIME = "time";
     private static final String RASPBERRY_ID = "raspberry";
     private static final String USER_ID = "user";
+    private static final String NOTE = "note";
 
     private JsonObject json;
 
     public JsonBuilder(Event event, RaspberryID raspberryID) {
 
-        if (event.getUserID() != null) {
+        if (event.getUserID() != null && event.getNote() != null) { // user event with note
+            json = Json.createObjectBuilder()
+                    .add(EVENT, event.getEventType().name())
+                    .add(TIME, event.getTime().toString())
+                    .add(RASPBERRY_ID, raspberryID.toString())
+                    .add(USER_ID, event.getUserID().toString())
+                    .add(NOTE, event.getNote())
+                    .build();
+
+        } else if (event.getUserID() != null) { // user event without note
             json = Json.createObjectBuilder()
                     .add(EVENT, event.getEventType().name())
                     .add(TIME, event.getTime().toString())
                     .add(RASPBERRY_ID, raspberryID.toString())
                     .add(USER_ID, event.getUserID().toString())
                     .build();
-        } else {
+        } else { // non user event
             json = Json.createObjectBuilder()
                     .add(EVENT, event.getEventType().name())
                     .add(TIME, event.getTime().toString())

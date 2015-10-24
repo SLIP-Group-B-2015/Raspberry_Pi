@@ -18,6 +18,10 @@
         "user": {
 			"description": "The uuid of the person associated with the event",
             "type": "string"
+        },
+        "note": {
+            "description": "The note left by a visiting user",
+            "type": "string"
         }
     },
     "required": ["event", "time", "raspberry"]
