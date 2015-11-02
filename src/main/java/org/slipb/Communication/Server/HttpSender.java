@@ -20,9 +20,9 @@ import java.io.UnsupportedEncodingException;
 public class HttpSender {
 
     private static final String HEADER_NAME = "content-type";
-    private static final String HEADER_VALUE = "application/x-www-form-urlencoded";
+    private static final String HEADER_VALUE = "application/json";
     private static final int MAX_ATTEMPTS = 3;
-    private static final String POS_RESPONSE = "RECEIVED";
+    private static final String POS_RESPONSE = "This is a test! It works!";
     private static final String NEG_RESPONSE = "NOT RECEIVED";
 
     private static final String HTTP_POST_FAILED = "HTTP POST Request failed, retrying...";
@@ -34,7 +34,7 @@ public class HttpSender {
         this.destination = destination;
     }
 
-    // returns true if HTTP post suceeds, false otherwise
+    // returns true if HTTP post succeeds, false otherwise
     public boolean send(String json) throws IOException {
         int attempts = 0; // try HTTP request MAX_ATTEMPTS times
         while (true) {
@@ -44,6 +44,9 @@ public class HttpSender {
             try {
                 HttpResponse httpResponse = postJson(json);
                 responseString = EntityUtils.toString(httpResponse.getEntity());
+                if (Main.DEBUG) {
+                    System.out.println(responseString);
+                }
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

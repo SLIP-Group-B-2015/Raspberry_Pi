@@ -11,6 +11,6 @@ public enum EventType {
 
     public static final int KNOCK_CODE = 100;
     public static final int MAIL_CODE = 101;
-    public static final int OPEN_CODE = 102;
-    public static final int CLOSE_CODE = 103;
+    public static final int OPEN_CODE = 1;
+    public static final int CLOSE_CODE = 0;
 }

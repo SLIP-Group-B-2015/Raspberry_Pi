@@ -12,7 +12,7 @@ import org.slipb.Internal.ID.RaspberryID;
 public class EventReceiver {
 
     private Event event;
-    private Boolean running = false;
+    private boolean running = false;
     private BluetoothServer bluetoothServer;
 
     public Event receive(RaspberryID raspberryID) {

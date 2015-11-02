@@ -78,7 +78,6 @@ public class BluetoothServer extends Thread {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
         return event;
     }
 }
