@@ -1,11 +1,7 @@
 package org.slipb.Internal.Event;
 
-import org.slipb.Communication.Sensor.BluetoothServer;
-import org.slipb.Internal.ID.RaspberryID;
+import org.slipb.Communication.Sensors.PythonServer;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.util.Date;
 
 /**
  * Created by Marshall Bradley (marshallbradley93@gmail.com)
@@ -17,16 +13,15 @@ public class EventReceiver {
 
     private Event event;
     private boolean running = false;
-    private BluetoothServer bluetoothServer;
+    private PythonServer pythonServer;
 
-    public Event receive(RaspberryID raspberryID) {
-        if (!running) {
-            bluetoothServer = new BluetoothServer(raspberryID);
-            bluetoothServer.run();
+    public Event receive() {
+        while (!running) {
+            pythonServer = new PythonServer();
             running = true;
         }
 
-        event = bluetoothServer.listen();
+        event = pythonServer.listen();
 
         return event;
     }

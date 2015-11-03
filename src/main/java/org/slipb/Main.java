@@ -13,11 +13,7 @@ public class Main {
 
     public static final Boolean DEBUG = true;
     private static final String FILE_LOCATION = "/home/pi/Desktop/source.id"; //"C:/source.id";
-<<<<<<< HEAD
-    private static final String DEFAULT_URL = "http://193.62.81.88:5000/";
-=======
     private static final String DEFAULT_URL = "http://193.62.81.88:5000";
->>>>>>> 83c5e826acd725c496df928ee93e1af6a9fb658c
 
     private static String serverUrl;
     private static RaspberryID raspberryID;
@@ -49,7 +45,7 @@ public class Main {
         // Enter main loop
         while (true) {
             try {
-                Event latestEvent = eventReceiver.receive(raspberryID);
+                Event latestEvent = eventReceiver.receive();
                 if (DEBUG) {
                     System.out.println("Received event");
                 }
