@@ -18,14 +18,12 @@ public class PythonServer {
     private Event event;
     private ServerSocket server;
     private Socket client;
-    private JsonParser jsonParser;
     private BufferedReader in;
 
     public PythonServer() {
         try {
             server = new ServerSocket(PORT);
             client = server.accept();
-            jsonParser = new JsonParser();
         } catch (UnknownHostException ex) {
             ex.printStackTrace();
         } catch (IOException ex) {
@@ -38,7 +36,9 @@ public class PythonServer {
             while (true) {
                 in = new BufferedReader((new InputStreamReader(client.getInputStream())));
                 String eventString = in.readLine();
-                event = jsonParser.parseJson(eventString);
+                JsonParser jsonParser = new JsonParser(eventString);
+                jsonParser.parse();
+                event = jsonParser.getEvent();
                 if (event != null) {
                     break;
                 }
