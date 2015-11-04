@@ -22,8 +22,8 @@ public class HttpSender {
     private static final String HEADER_NAME = "content-type";
     private static final String HEADER_VALUE = "application/json";
     private static final int MAX_ATTEMPTS = 3;
-    private static final String POS_RESPONSE = "true";
-    private static final String NEG_RESPONSE = "false";
+    private static final String POS_RESPONSE = "True";
+    private static final String NEG_RESPONSE = "False";
 
     private static final String HTTP_POST_FAILED = "HTTP POST Request failed, retrying...";
     private static final String MAX_HTTP_POST_FAILED = "HTTP POST Request failed, max attempts reached";
