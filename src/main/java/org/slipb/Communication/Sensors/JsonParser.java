@@ -32,19 +32,19 @@ public class JsonParser {
     public void parse() {
         if (eventString != null) {
             JsonObject jsonObject = Json.createReader(new StringReader(eventString)).readObject();
-            int eventCode = jsonObject.getInt(CODE);
             Date time = new Date();
 
-            if (eventCode == EventType.ID_SCAN_CODE) {
+            try {
                 UserID userId = new UserID(jsonObject.getString(USER));
 
-                if (!jsonObject.isNull(NOTE)) {
+                try {
                     event = new Event(EventType.ID_SCAN, time, userId, jsonObject.getString(NOTE));
-                } else {
+                } catch (NullPointerException ex) {
                     event = new Event(EventType.ID_SCAN, time, userId);
                 }
 
-            } else {
+            } catch (NullPointerException ex) {
+                int eventCode = jsonObject.getInt(CODE);
                 if (eventCode == EventType.CLOSE_CODE) {
                     event = new Event(EventType.CLOSE, time);
                 } else if (eventCode == EventType.OPEN_CODE) {

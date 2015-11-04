@@ -22,8 +22,8 @@ public class HttpSender {
     private static final String HEADER_NAME = "content-type";
     private static final String HEADER_VALUE = "application/json";
     private static final int MAX_ATTEMPTS = 3;
-    private static final String POS_RESPONSE = "This is a test! It works!";
-    private static final String NEG_RESPONSE = "";
+    private static final String POS_RESPONSE = "true";
+    private static final String NEG_RESPONSE = "false";
 
     private static final String HTTP_POST_FAILED = "HTTP POST Request failed, retrying...";
     private static final String MAX_HTTP_POST_FAILED = "HTTP POST Request failed, max attempts reached";
@@ -71,11 +71,11 @@ public class HttpSender {
         HttpResponse response = null;
         try {
             HttpClient httpClient = HttpClientBuilder.create().build();
-            HttpPost request = new HttpPost(destination);
+            HttpPost httpPost = new HttpPost(destination);
             StringEntity params = new StringEntity(json);
-            request.addHeader(HEADER_NAME, HEADER_VALUE);
-            request.setEntity(params);
-            response = httpClient.execute(request);
+            httpPost.addHeader(HEADER_NAME, HEADER_VALUE);
+            httpPost.setEntity(params);
+            response = httpClient.execute(httpPost);
 
         } catch (UnsupportedEncodingException ex) {
             ex.printStackTrace();
