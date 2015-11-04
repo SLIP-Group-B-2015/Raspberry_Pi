@@ -23,7 +23,7 @@ public class HttpSender {
     private static final String HEADER_VALUE = "application/json";
     private static final int MAX_ATTEMPTS = 3;
     private static final String POS_RESPONSE = "This is a test! It works!";
-    private static final String NEG_RESPONSE = "NOT RECEIVED";
+    private static final String NEG_RESPONSE = "";
 
     private static final String HTTP_POST_FAILED = "HTTP POST Request failed, retrying...";
     private static final String MAX_HTTP_POST_FAILED = "HTTP POST Request failed, max attempts reached";
@@ -35,11 +35,11 @@ public class HttpSender {
     }
 
     // returns true if HTTP post succeeds, false otherwise
-    public boolean send(String json) throws IOException {
+    public boolean send(String json) {
         int attempts = 0; // try HTTP request MAX_ATTEMPTS times
         while (true) {
 
-            String responseString = NEG_RESPONSE;
+            String responseString;
 
             try {
                 HttpResponse httpResponse = postJson(json);
@@ -48,7 +48,7 @@ public class HttpSender {
                     System.out.println(responseString);
                 }
             } catch (IOException ex) {
-                ex.printStackTrace();
+                responseString = NEG_RESPONSE;
             }
 
             if (responseString.equals(POS_RESPONSE)) {
@@ -67,7 +67,7 @@ public class HttpSender {
         }
     }
 
-    private HttpResponse postJson(String json) {
+    private HttpResponse postJson(String json) throws IOException {
         HttpResponse response = null;
         try {
             HttpClient httpClient = HttpClientBuilder.create().build();
@@ -78,8 +78,6 @@ public class HttpSender {
             response = httpClient.execute(request);
 
         } catch (UnsupportedEncodingException ex) {
-            ex.printStackTrace();
-        } catch (IOException ex) {
             ex.printStackTrace();
         }
         return response;

@@ -44,24 +44,19 @@ public class Main {
 
         // Enter main loop
         while (true) {
-            try {
-                Event latestEvent = eventReceiver.receive();
-                if (DEBUG) {
-                    System.out.println("Received event");
-                }
+            Event latestEvent = eventReceiver.receive();
+            if (DEBUG) {
+                System.out.println("Received event");
+            }
 
-                String json = new JsonBuilder(latestEvent, raspberryID).getString();
-                if (DEBUG) {
-                    System.out.println("Posting JSON: " + json + " to server");
-                }
+            String json = new JsonBuilder(latestEvent, raspberryID).getString();
+            if (DEBUG) {
+                System.out.println("Posting JSON: " + json + " to server");
+            }
 
-                boolean success = httpSender.send(json);
-                if (DEBUG && success) {
-                    System.out.println("HTTP Post succeeded");
-                }
-
-            } catch (IOException ex) {
-                ex.printStackTrace();
+            boolean success = httpSender.send(json);
+            if (DEBUG && success) {
+                System.out.println("HTTP Post succeeded");
             }
         }
     }

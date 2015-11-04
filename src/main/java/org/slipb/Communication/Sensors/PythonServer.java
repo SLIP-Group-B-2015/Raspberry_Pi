@@ -23,7 +23,7 @@ public class PythonServer {
     public PythonServer() {
         try {
             server = new ServerSocket(PORT);
-            client = server.accept();
+            acceptClient();
         } catch (UnknownHostException ex) {
             ex.printStackTrace();
         } catch (IOException ex) {
@@ -32,20 +32,33 @@ public class PythonServer {
     }
 
     public Event listen() {
+        event = null;
         try {
             while (true) {
                 in = new BufferedReader((new InputStreamReader(client.getInputStream())));
                 String eventString = in.readLine();
-                JsonParser jsonParser = new JsonParser(eventString);
-                jsonParser.parse();
-                event = jsonParser.getEvent();
+                if (eventString == null) {
+                    acceptClient();
+                } else {
+                    JsonParser jsonParser = new JsonParser(eventString);
+                    jsonParser.parse();
+                    event = jsonParser.getEvent();
+                }
                 if (event != null) {
                     break;
                 }
             }
-        } catch (Exception ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
         return event;
+    }
+
+    private void acceptClient() {
+        try {
+            client = server.accept();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 }
