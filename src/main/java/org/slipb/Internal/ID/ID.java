@@ -12,7 +12,7 @@ public abstract class ID {
 
     private static final int SHORT_LENGTH = 8;
 
-    private UUID uuid;
+    private final UUID uuid;
 
     public ID(UUID uuid) {
         this.uuid = uuid;
