@@ -25,7 +25,7 @@ public class Main {
             serverUrl = args[0];
         } else {
             serverUrl = DEFAULT_URL;
-            System.err.println("No server URL specified, reverting to default: " + DEFAULT_URL);
+            System.out.println("No server URL specified, reverting to default: " + DEFAULT_URL);
         }
 
         // Set Raspberry Pi's unique id
